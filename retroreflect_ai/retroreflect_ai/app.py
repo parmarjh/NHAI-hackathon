@@ -20,6 +20,7 @@ import sys
 from pathlib import Path
 from PIL import Image, ImageTk, ImageEnhance, ImageFilter
 from dotenv import load_dotenv
+from vision_fast import FastVisionEngine
 
 load_dotenv() # Load from .env file
 
@@ -32,6 +33,8 @@ CYAN      = "#00ccff"
 GREEN     = "#00ff88"
 RED       = "#ff2244"
 ORANGE    = "#ff8800"
+PURPLE    = "#aa00ff"
+VIOLET    = "#cc00ff"
 TEXT      = "#c8d8e8"
 MUTED     = "#4a6888"
 FONT_MONO = ("Courier", 10)
@@ -298,6 +301,7 @@ class RetroReflectApp(tk.Tk):
         self.cap         = None
         self.cam_running = False
         self.history     = []
+        self.vision_engine = FastVisionEngine() # Real-time YOLO Engine
 
         self._build_ui()
         self._center_window()
@@ -656,30 +660,42 @@ class RetroReflectApp(tk.Tk):
     # ── AI/ML Stream Logic ──────────────────────────────────────────────────────
     def _toggle_stream(self):
         if not hasattr(self, "streaming") or not self.streaming:
+            success = self.vision_engine.start()
+            if not success:
+                self._set_status("✗ Could not start Vision Engine", RED)
+                return
             self.streaming = True
             self.btn_stream.config(text="■ STOP STREAM", bg=RED, fg="#fff")
             self._run_stream_tick()
-            self._set_status("AI/ML Stream Active: Processing frames at high speed...", GREEN)
+            self._set_status("AI/ML Stream Active: YOLOv8 Processing @ 30+ FPS", GREEN)
         else:
             self.streaming = False
+            self.vision_engine.stop()
             self.btn_stream.config(text="📡  START AI/ML STREAM", bg=BG3, fg=GREEN)
+            self._draw_drop_placeholder()
             self._set_status("Stream paused.", MUTED)
 
     def _run_stream_tick(self):
         if hasattr(self, "streaming") and self.streaming:
-            # Simulate high-speed AI processing
-            w = self.img_canvas.winfo_width() or 340
-            h = self.img_canvas.winfo_height() or 220
-            self.img_canvas.delete("stream_ui")
-            cx, cy = w//2, h//2
+            with self.vision_engine.lock:
+                if self.vision_engine.frame is not None:
+                    # Get frame with HUD
+                    frame = self.vision_engine.frame.copy()
+                    frame = self.vision_engine.draw_hud(frame)
+                    
+                    # Convert to PIL/Tkinter
+                    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+                    img = Image.fromarray(cv2image)
+                    
+                    cw = self.img_canvas.winfo_width() or 340
+                    ch = self.img_canvas.winfo_height() or 220
+                    img.thumbnail((cw, ch), Image.LANCZOS)
+                    
+                    self.photo_img = ImageTk.PhotoImage(img)
+                    self.img_canvas.delete("all")
+                    self.img_canvas.create_image(cw // 2, ch // 2, anchor="center", image=self.photo_img)
             
-            # Draw radar/scan scanning effect
-            scan_y = (math.sin(self.winfo_fpixels('1i') * self._spin_idx / 50) + 1) / 2 * h
-            self.img_canvas.create_line(0, scan_y, w, scan_y, fill=GREEN, width=1, tags="stream_ui")
-            self.img_canvas.create_text(w-50, 20, text="● AI PROCESSING", font=FONT_XS, fill=RED, tags="stream_ui")
-            
-            self._spin_idx += 1
-            self.after(50, self._run_stream_tick)
+            self.after(10, self._run_stream_tick)
 
     # ── Analysis ────────────────────────────────────────────────────────────────
     def _start_analysis(self):
