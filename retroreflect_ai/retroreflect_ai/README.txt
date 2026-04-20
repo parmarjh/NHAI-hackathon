@@ -1,88 +1,67 @@
 ╔══════════════════════════════════════════════════════════╗
-║   RETROREFLECT·AI  —  Python Desktop Edition            ║
-║   AI-Powered Road Sign Retroreflectivity Analyzer       ║
+║   RETROREFLECT·AI  —  NHAI ENTERPRISE EDITION          ║
+║   Unified Highway Health Intelligence Platform          ║
 ╚══════════════════════════════════════════════════════════╝
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+VERSION: 2.6 [Enterprise]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-WHAT IT DOES
+WHAT THIS PLATFORM SOLVES
+──────────────────────────
+A comprehensive AI/ML suite for NHAI road safety auditing:
+
+  ◈ RETROREFLECTIVITY: Automated IRC 67/35 compliance scoring.
+  ◈ ROAD HEALTH: Detection of Potholes, Cracks, and Surface Wear.
+  ◈ TRAFFIC SYSTEMS: Signal phase detection & Gantry visibility.
+  ◈ ENV HAZARDS: Real-time Water-logging & Debris alerts.
+  ◈ MOBILE AUDIT: 100km/h Vehicle-Mounted or Drone data analysis.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CORE CAPABILITIES
 ────────────
-Upload any road sign or road marking image and the AI will:
-
-  ◈ Score retroreflectivity (0–100 index)
-  ◈ Grade as EXCELLENT / GOOD / FAIR / POOR / CRITICAL
-  ◈ Detect material type (Type III Sheeting, Glass Bead, etc.)
-  ◈ Estimate night-time visibility distance
-  ◈ Assess degradation level and estimated age
-  ◈ Check compliance status (Compliant / Non-Compliant / Borderline)
-  ◈ Set action urgency (Immediate → No action needed)
-  ◈ List issues detected and expert recommendations
-  ◈ Provide 2-sentence expert AI analysis
+  1. LIVE AUDIT: Real-time camera processing during highway survey.
+  2. BATCH VIDEO AUDIT: Automated post-drive analysis of MP4/AVI footage.
+  3. CASCADING FAILOVER: Auto-switching between 4 AI Providers:
+     [ Gemini 1.5 → Claude 3.5 → OpenAI GPT-4o → OpenRouter ]
+  4. TELEMETRY LINKING: GPS/Speed data integration for NHAI assets.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 REQUIREMENTS
 ────────────
-  • Python 3.9 or higher
-  • Tkinter (usually bundled with Python)
-  • Anthropic API key  →  https://console.anthropic.com/
+  • Python 3.10+
+  • Tkinter & OpenCV
+  • API Key (Gemini, Claude, or OpenAI)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-SETUP & RUN
-───────────
+SETUP & DEPLOYMENT
+──────────────────
+1. INITIALIZE ENVIRONMENT:
+   Create a `.env` file with your keys:
+   GOOGLE_API_KEY=AIza...
+   ANTHROPIC_API_KEY=sk-ant...
+   OPENAI_API_KEY=sk-proj...
 
-1. Install dependencies:
+2. INSTALL DEPENDENCIES:
+   pip install -r requirements.txt
 
-     pip install -r requirements.txt
-
-2. Run the app:
-
-     python app.py
-
-   OR set your API key as environment variable (optional):
-
-     # Windows
-     set ANTHROPIC_API_KEY=sk-ant-...
-     python app.py
-
-     # macOS / Linux
-     export ANTHROPIC_API_KEY=sk-ant-...
-     python app.py
-
-3. In the app:
-   ▸ Paste your Anthropic API key in the top bar
-   ▸ Click "BROWSE IMAGE" to select a road sign photo
-   ▸ Click "ANALYZE" to run the AI analysis
-   ▸ View the full retroreflectivity report on the right panel
+3. EXECUTE:
+   python app.py
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-SUPPORTED IMAGE FORMATS
-───────────────────────
-  JPG / JPEG / PNG / WEBP / BMP
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-TROUBLESHOOTING
-───────────────
-  ✗ "tkinter not found"  →  Install python3-tk:
-       Ubuntu/Debian:  sudo apt install python3-tk
-       macOS:          brew install python-tk
-       Windows:        Re-install Python with tcl/tk option
-
-  ✗ "API error"          →  Check your API key is valid and
-                             you have sufficient credits.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PROJECT STRUCTURE
+PROJECT DIRECTORY
 ─────────────────
-  retroreflect_ai/
-  ├── app.py            ← Main application (single file)
-  ├── requirements.txt  ← Python dependencies
-  └── README.txt        ← This file
+  .
+  ├── app.py            ← NHAI Intelligence Hub
+  ├── .env              ← Secure API Configuration
+  ├── requirements.txt  ← Dependency Manifest
+  ├── README.html       ← Interactive Stakeholder Portal
+  └── README.txt        ← System Documentation [This File]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  RETROREFLECT·AI  •  POWERED BY CLAUDE AI  •  2025
+NHAI HACKATHON 2025 • MISSION: SAFER INDIAN HIGHWAYS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
