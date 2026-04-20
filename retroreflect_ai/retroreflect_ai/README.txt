@@ -4,13 +4,14 @@
 ╚══════════════════════════════════════════════════════════╝
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-VERSION: 2.6 [Enterprise]
+VERSION: 3.0 [Ultra-Fast Vision Upgrade]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 WHAT THIS PLATFORM SOLVES
 ──────────────────────────
 A comprehensive AI/ML suite for NHAI road safety auditing:
 
+  ◈ REAL-TIME VISION: YOLOv8-powered detection @ 30+ FPS.
   ◈ RETROREFLECTIVITY: Automated IRC 67/35 compliance scoring.
   ◈ ROAD HEALTH: Detection of Potholes, Cracks, and Surface Wear.
   ◈ TRAFFIC SYSTEMS: Signal phase detection & Gantry visibility.
@@ -21,19 +22,21 @@ A comprehensive AI/ML suite for NHAI road safety auditing:
 
 CORE CAPABILITIES
 ────────────
-  1. LIVE AUDIT: Real-time camera processing during highway survey.
-  2. BATCH VIDEO AUDIT: Automated post-drive analysis of MP4/AVI footage.
+  1. HIGH-SPEED REAL-TIME VISION: Local YOLOv8 inference for asset detection.
+  2. DEEP AUDIT: Frame-by-frame analysis with Gemini 1.5 & Claude 3.5.
   3. CASCADING FAILOVER: Auto-switching between 4 AI Providers:
      [ Gemini 1.5 → Claude 3.5 → OpenAI GPT-4o → OpenRouter ]
-  4. TELEMETRY LINKING: GPS/Speed data integration for NHAI assets.
+  4. SMART HUD: Cyberpunk-themed telemetry overlay for field operators.
+  5. BATCH PROCESSING: Automated audit of post-drive highway footage.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 REQUIREMENTS
 ────────────
   • Python 3.10+
-  • Tkinter & OpenCV
-  • API Key (Gemini, Claude, or OpenAI)
+  • Tkinter, OpenCV, PIL
+  • Ultralytics (YOLOv8)
+  • API Keys (Gemini, Claude, or OpenAI)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -47,16 +50,21 @@ SETUP & DEPLOYMENT
 
 2. INSTALL DEPENDENCIES:
    pip install -r requirements.txt
+   (Note: Includes ultralytics and opencv-python)
 
-3. EXECUTE:
+3. EXECUTE MAIN APP:
    python app.py
+
+4. EXECUTE STANDALONE VISION ENGINE (FAST):
+   python vision_fast.py
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PROJECT DIRECTORY
 ─────────────────
   .
-  ├── app.py            ← NHAI Intelligence Hub
+  ├── app.py            ← Main Intelligence Hub (GUI)
+  ├── vision_fast.py    ← High-Speed Real-time CV Engine
   ├── .env              ← Secure API Configuration
   ├── requirements.txt  ← Dependency Manifest
   ├── README.html       ← Interactive Stakeholder Portal
