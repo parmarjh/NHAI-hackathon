@@ -1,19 +1,17 @@
-.env
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.venv/
+*.py[cod]
+*$py.class
 env/
 venv/
-.pytest_cache/
-.coverage
-htmlcov/
-*.swp
-*.bak
-vid_thumb.jpg
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+batch_frame.jpg
 batch_f_*.jpg
 live_sample.jpg
-batch_frame.jpg
-indian_road_signs_atlas_*.png
-vcap_thumb.jpg
+vid_thumb.jpg
